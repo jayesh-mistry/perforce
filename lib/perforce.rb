@@ -1,4 +1,3 @@
-
 require 'thread'
 require 'P4'
 
@@ -156,6 +155,13 @@ class Perforce
     changelist.add_files(*files)
     yield
     changelist.submit
+  end
+  
+  #
+  # Convenience method to revert and reopen files
+  # method stub only
+  #
+  def revert_and_edit(changelist, *files)
   end
 
   #
