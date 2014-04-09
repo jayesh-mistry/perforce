@@ -162,6 +162,10 @@ class Perforce
   # method stub only
   #
   def revert_and_edit(changelist, *files)
+    # Revert files
+    revert_files(files)
+    # re-open the same files for edit
+    run("edit", *files)
   end
 
   #
