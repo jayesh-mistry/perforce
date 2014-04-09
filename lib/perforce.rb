@@ -162,10 +162,18 @@ class Perforce
   # method stub only
   #
   def revert_and_edit(changelist, *files)
-    # Revert files
-    revert_files(files)
-    # re-open the same files for edit
-    run("edit", *files)
+      # Revert the files in the specified changelist.
+      # If a list of files is given, only revert those files,
+      # otherwise grab the list of files in the changelist
+      if(files) do
+      	run("revert", "-c", changelist, *files)
+      else
+      	change = run("change", "-o", changelist).shift
+      	files = change[ "Files" ]
+      	run("revert", "-c", changelist)      	
+      end
+      # re-open the same files for edit
+      run("edit", *files)
   end
 
   #
